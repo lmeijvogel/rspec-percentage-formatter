@@ -4,8 +4,6 @@ class PercentageFormatter < RSpec::Core::Formatters::BaseTextFormatter
   class Output
     attr_accessor :rspec_output, :number_of_examples_executed, :last_printed_percentage
 
-    PERCENTAGE_SEGMENT_SIZE = 5
-
     def initialize(rspec_output)
       self.rspec_output = rspec_output
 
@@ -44,7 +42,17 @@ class PercentageFormatter < RSpec::Core::Formatters::BaseTextFormatter
     end
 
     def floor_to_printable_percentage(number)
-      ((number / PERCENTAGE_SEGMENT_SIZE).floor * PERCENTAGE_SEGMENT_SIZE).to_i
+      ((number / percentage_segment_size).floor * percentage_segment_size).to_i
+    end
+
+    def percentage_segment_size
+      @percentage_segment_size ||= if @example_count < 75
+                                     20
+                                   elsif @example_count < 200
+                                     10
+                                   else
+                                     5
+                                   end
     end
 
     def percentage_done
