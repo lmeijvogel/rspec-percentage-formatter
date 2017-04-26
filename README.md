@@ -1,6 +1,6 @@
 # PercentageFormatter
 
-This is a RSpec formatter that outputs the spec run progress in percentages (increments of 5%).
+This is an RSpec formatter that outputs the spec run progress in percentages (increments of 5%).
 
 Each increment is printed on a new line, so Jenkins will keep up with the output.
 
